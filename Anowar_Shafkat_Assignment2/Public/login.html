@@ -1,0 +1,41 @@
+<html lang="en">
+        <link href="product_style.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Please Login!</title>
+    <link href="product_style.css" rel="stylesheet">
+
+</head>
+
+<h1>Shafkat's Photo Gallery</h1>
+
+<h2>Please login below to proceed</h2>
+
+<body>
+    <form name="loginform" method="POST"> 
+        <div>
+        <input type="text" name="username" size="40" placeholder="enter username" ><br /> 
+        <input type="password" name="password" size="40" placeholder="enter password"><br />
+        <input type="submit" value="login" id="submit">  
+    </div>
+        </form>  
+</body>
+
+<h2>Are you a new user? Please click below to register!</h2>
+
+<body>
+<div>
+    <form action="./registration.html">
+    <input type="submit" value="Register Here" id="regpage" name="register_here">
+    </form>
+</div>
+
+</body>
+
+<script>
+regpage.href = "registration.html" + document.location.search;
+loginform.action = "./login" + document.location.search;
+</script>
+</html>
