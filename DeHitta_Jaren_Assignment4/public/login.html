@@ -1,0 +1,79 @@
+<script src="./product.js"></script>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    //shows alert error if there is either an invalid username or invalid password when user tries to login
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has("error")) {
+        alert(urlParams.get("error"));
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+  <link href="general.css" rel="stylesheet">
+  <link href="login_reg.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <ui>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="product_display.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="registration.html">Get Started</a></li>
+          <li><a href="cart">Cart</a></li>
+        </ui>
+      </nav>
+    </div>
+  </header>
+
+  <h1 style="text-align:center">Jaren's Stuffed Animal Store</h1>
+
+  <div class="card">
+    <u>
+      <h2>Login Page</h2>
+    </u>
+
+    <script>
+//comments for form bellow
+//placeholder shows what's on the textbox (removed when something is typed in the textbox)
+//required means they are required to input something
+    </script>
+
+    <h4>Login to continue in order to purchase.</h4>
+
+    <form name="login" method="POST">
+
+      <div class="container">
+        <form action="" method="POST">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter Username" name="username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter Password" required>
+
+          <input type="submit" value="Login" id="submit" name="login_in">
+        </form>
+      </div>
+      <h4>Want to join the squad?</h4>
+      <a href="registration.html"> Click here to register </a>
+  </div>
+
+</body>
+
+</html>

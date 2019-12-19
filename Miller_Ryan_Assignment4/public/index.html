@@ -1,0 +1,60 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styling.css">
+    <title>Login Page</title>
+    <script src="./workouts.js"></script>
+
+
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        //Display login error if there is one, finds error in URL string
+        if (params.has("LoginError")) {
+            alert(params.get("LoginError"));
+        }
+        //Takes data from url when page is invalid and puts it back (makes inputs sticky)
+        if (params.has("StickyLoginUser")) {
+            StickyLoginUser = params.get("StickyLoginUser")
+        }
+    </script>
+
+</head>
+
+<body class="content">
+<br><br><br><br><br><br><br>
+   <h1>The Daily Grind</h1>
+    
+
+    <Table>
+        <tr>
+            <td>
+                <form method="POST" name="Login_Form" action="./LoginForm">
+                    <input type="text" name="username" size="37" id="Userbox" placeholder="Enter Username">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="password" name="password" size="37" placeholder="Enter Password">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Login Here" id="submit"></form>
+            <a id="reg_link" href = "register.html"><button type="button">Register Here</button></a></td>
+        </tr>
+        
+
+    </Table>
+
+</body>
+
+</html>
+
+<script>
+    //Sends link with quantity data to pass to next page
+    //Inputs sticky User so they know what they just put, passwords are never sticky so just for user.
+    document.getElementById("Userbox").value = StickyLoginUser;
+</script>

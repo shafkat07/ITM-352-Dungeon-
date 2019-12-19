@@ -1,0 +1,130 @@
+<script src="./product.js"></script>
+
+<script>
+    //borrowed code from Assignment 1 example from Dr. Port
+    function isNonNegInt(q, return_errors = false) {
+        errors = []; //assume that there are no errors at first
+        if (q == '') q = 0; //blank textboxes/inputs means that they are 0
+        if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); //Check if the string is a number
+        else if (q < 0) errors.push('<font color="red">Negative value!</font>'); //Check if it is non-negative number
+        else if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); //Check that it is an integer
+        return return_errors ? errors : (errors.length == 0); //return any error messages above
+    }
+
+    //borrowed code from Assignment 1 example from Dr. Port
+    function checkQuantityTextbox(theTextbox) {
+        errs = isNonNegInt(theTextbox.value, true); //if non neagtive integer, data is valid
+        if (errs.length == 0) errs = ['Quantity:']; //when typing in the textbox, this will display 
+        if (theTextbox.value.trim() == '') errs = ['Quantity:']; //label to the left of the texbox
+        document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", "); //get textbox value above and display as label
+    }
+
+    //borrowed code from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch by MDN contributors
+    //using fetch to POST JSON data from products_display page to save in server array
+    //takes js data and strinify 
+    //respond with the js data 
+    async function postData(url = '', data = {}) {
+        //console.log.data//
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'client', // no-referrer, *client
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        return await response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    //borrowed code from Assignment 1 example from Dr. Port
+    window.onload = function () {
+        let params = (new URL(document.location)).searchParams; //get the query string which has the form data
+        //form was submitted so check that quantities are valid then redirect to invoice if ok.
+        if (params.has('purchase_submit')) { //variable purchase_submit is connected to the purchase button
+            has_errors = false; //assume that quantities are valid
+            total_qty = 0; //need to check if something was selected so we will look if the total > 0
+            for (i = 0; i < products.length; i++) { //get product from the array in the js file,
+                if (params.has(`quantity${i}`)) { //if there is quantity inputted in the textbox then (see below)
+                    a_qty = params.get(`quantity${i}`); //get that quantity data inputted
+                    //make textboxes sticky in case of invalid data
+                    product_selection_form[`quantity${i}`].value = a_qty;
+                    total_qty += a_qty;
+                    if (!isNonNegInt(a_qty)) {
+                        has_errors = true; //oops, invalid quantity
+                        checkQuantityTextbox(product_selection_form[`quantity${i}`]); // show where the error is
+                    }
+                }
+            }
+            //now respond to errors or redirect to invoice if all is okay
+            if (has_errors) { //if there are errors, show alert
+                alert("Please enter only valid quantities!");
+            } else if (total_qty == 0) { //if there are no quantities working, show alert
+                alert("Please select quantities!");
+            }
+        }
+    }
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <link href="display.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<header>
+    <div class="container">
+        <nav>
+            <ui>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="product_display.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="registration.html">Get Started</a></li>
+                <li><a href="cart">Cart</a></li>
+            </ui>
+        </nav>
+    </div>
+</header>
+
+<body>
+
+    <form action="invoice.html" method="GET">
+
+        <h1 style="text-align:center">Da Stuffed Animals</h1>
+
+        <u>
+            <h3 style="text-align:center">Shopping Cart</h3>
+        </u>
+
+        <script>
+            //get product information that was stored in the session, which originated from the products page
+            for (i = 0; i < request.session.cart.length; i++) {
+                document.write(`
+            <h2>${products[idx].toy}</h2>
+            <img src="${products[idx].image}">
+            <p class="price">${products[idx].price}</p>
+            <input type="text" disabled value="${p_qty}" onkeyup="checkQuantityTextbox(this);">
+            `)
+            };
+        //quantity only showing as placeholder
+        </script>
+
+    </form>
+
+</body>
+</form>
+
+</html>

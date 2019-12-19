@@ -1,0 +1,150 @@
+<script src="./product.js" type=""></script>
+
+<script>
+    let params = (new URL(document.location)).searchParams; //searching for params in a new URL document location
+    //getting the quantity amount from product.js for each data inputted
+    
+    //pop-up message when usccesful login occurs 
+    //will show up before loading to invoice.html
+    if(params.has('username')){ //
+        alert(`thank you for your purchase ${params.get('username')}`);
+    }
+    //send message that they must login or register before they can be sent to the invoice
+    /*else{
+        alert('you must login or register first');
+        window.location = 'login.html';
+        window.stop();
+    }*/
+    var quantities = [];
+    if (params.has('purchase_submit')) {
+        for (i = 0; i < products.length; i++) {
+            if (params.has(`quantity${i}`)) {
+                a_qty = params.get(`quantity${i}`);
+                quantities[i] = a_qty;
+            }
+        }
+    }
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nintendo Switch Game Store Receipt</title>
+    <link href="invoice.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <script>
+            //to get username (for personalization in the invoice)
+            //still needs to be tested out
+            usr = GET[`fullname`];
+            document.write(`
+            <h1>Hello there, ${usr}</h1>
+          `)
+        </script>
+        <h1>Invoice Receipt</h1>
+    </header>
+    <table border="2">
+        <tbody>
+            <tr id="invoice">
+                <th style="text-align: center;" width="43%">Item</th>
+                <th style="text-align: center;" width="11%">Quantity</th>
+                <th style="text-align: center;" width="13%">Price</th>
+                <th style="text-align: center;" width="54%">Extended Price</th>
+            </tr>
+            <script>
+                //above is the labels for the table
+
+                //define subtotal
+                subtotal = 0;
+                //get products information for each from the array to compute
+                for (i = 0; i < products.length; i++) {
+                    if (quantities[i] > 0) {
+                        //product row
+                        //compute extended_price
+                        extended_price = quantities[i] * products[i].price
+                        //compute subtotal
+                        subtotal += extended_price;
+                        //writes out the product data from the product array
+                        document.write(`
+        <tr>
+          <td width="43%">${products[i].game}</td>
+          <td align="center" width="11%">${quantities[i]}</td>
+          <td width="13%">\$${products[i].price}</td>
+          <td width="54%">\$${extended_price}</td>
+        </tr>
+        `);
+                    }
+                }
+                //compute tax
+                var tax_rate = .04712;
+                var tax = tax_rate * subtotal;
+
+                //calculate shipping
+                if (subtotal <= 50) {
+                    shipping = 5; //shipping is $5 if subtotal is less than or equal to 100
+                }
+                else if (subtotal <= 100) {
+                    shipping = 2; //shipping is $2 if subtotal is less than or equal to 250
+                }
+                else {
+                    shipping = 0; //free shipping if greater than 250
+                }
+
+                // compute grand total 
+                var grandtotal = subtotal + tax + shipping;
+
+      //borrowed code from Invoice WOD  Assignment 1 example
+      //below displays subtotal, tax, shipping, and total with two decimal points
+            </script>
+            <tr>
+                <td colspan="4" width="100%">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;" colspan="3" width="67%">Sub-Total</td>
+                <td width="54%">$
+                    <script>document.write(subtotal.toFixed(2));</script>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center;" colspan="3" width="67%">Tax</span></td>
+                <td width="54%">$
+                    <script>document.write(tax.toFixed(2));</script>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center;" colspan="3" width="67%">Shipping</span></td>
+                <td width="54%">$
+                    <script>document.write(shipping.toFixed(2));</script>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+                <td width="54%"><strong>$
+                        <script>document.write(grandtotal.toFixed(2));</script></strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;" colspan="5" width="121%"><strong>
+                        OUR SHIPPING POLICY: <br>
+                        Subtotals less than $50 will be charged $5 shipping. <br>
+                        Subtotals between $50 - $100 will be charged $2 shipping. <br>
+                        Subtotals over $100 will be have free shipping. <br>
+                    </strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        <h1>
+            <script>
+                //personalize username
+                //params.get means get username, which is defined in the server
+                document.write(`Enjoy Your New Toy ${params.get('username')}!`);
+            </script>
+        </h1>
+    </footer>
+</body>
+
+</html>
