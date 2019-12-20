@@ -1,0 +1,109 @@
+<!-- Kelsey Ann Kimura: Registration Page -->
+<!-- This webpage allows the user to register an account on the website. Validation Code is in place to verify the information the user enters is accurate -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+
+        // get the query string values from form submission (Lab13 order_page)
+        // From Assignment1_DesignExamples Asssignment1_2file products_display.html
+        let params = (new URL(document.location)).searchParams; //Allow to get parameters
+
+        // Creating function window.onload so when the page is loading, it checks to make sure there is a quantity written and that the quantities in textbox are valid
+        //From Assignment1_Design_Examples > Asssignment1_2file > store_server.js 
+
+        window.onload = function () { // creating the function for window.onload
+            //Check if we're getting redirected from the server because of an error
+            if (params.has('errors')) { //if params has invalid registration data
+                // Put the original data back into the textboxes
+                //put values of query string into boxes
+                Register['name'].value = params.get('name'); //for name
+                Register['username'].value = params.get('username');//for username
+                Register['password'].value = params.get('password');//for password
+                Register['confirmpsw'].value = params.get('confirmpsw'); //for confirm password
+                Register['email'].value = params.get('email'); //for email
+
+                //get errors, indicate them on form
+                //if there is a registration error, put up an alert
+                alert('Fix the following errors: \n' + params.get('errors'));
+
+            }
+
+    //writing the errors where they occur for each type of error
+        if (params.has('nameerrors')) { //if detect name errors
+            var nameerrors = params.get('nameerrors'); //make variable nameerrors
+            document.getElementById("namelabel").innerHTML = nameerrors; //write name errors where occur
+        }
+        if (params.has('usererrors')) { //if detect username errors
+            var usererrors = params.get('usererrors'); //make variable usererrors
+            document.getElementById("userlabel").innerHTML = usererrors; //write username errors where occur
+        }
+        if (params.has('passerrors')) { //if detect password errors
+            var passerrors = params.get('passerrors'); //make variable passerrors
+            document.getElementById("pswlabel").innerHTML = passerrors; //write password errors where occur
+        } 
+        if (params.has('confirmerrors')) { //if detect confirm password errors
+            var confirmerrors = params.get('confirmerrors'); //make variable confirmerrors
+            document.getElementById("confirmpswlabel").innerHTML = confirmerrors; //write confirmation errors where occur
+        } 
+        if (params.has('emailerrors')) { //if detect email errors
+            var emailerrors = params.get('emailerrors'); //make variable email errors
+            document.getElementById("emaillabel").innerHTML = emailerrors; //write email errors where occur
+        }
+        }
+
+ 
+
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="login-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <!-- //Creating the login form*/
+/*Help from https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_password*/ -->
+        <!-- Help from https://www.w3schools.com/howto/howto_css_login_form.asp -->
+        <!-- Code for Maximum Length of Text: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text -->
+        <form name="Register" method="POST">
+            Registration Page <br> <br>
+            <div class="container">
+                <label for="name"><b>Name</b></label>
+                <input type="text" name="name" maxlength="30" onkeyup="" required><br>
+                <label for="namelabel" id="namelabel"></label>
+                <br>
+                <label for="username"><b>Username</b></label>
+                <input type="text" id="username" name="username" onkeyup="" minlength="4" maxlength="10" required>
+                <br>
+                <label for="userlabel" id="userlabel"></label>
+                <br>
+                <label for="password"><b>Password</b></label>
+                <input type="password" name="password" onkeyup="" minlength="6" required><br>
+                <label for="pswlabel" id="pswlabel"></label>
+                <br>
+                <label for="confirmpsw"><b>Confirm Password</b></label>
+                <input type="password" name="confirmpsw" onkeyup="" required><br>
+                <label for="confirmpswlabel" id="confirmpswlabel"></label>
+                <br>
+                <label for="email"><b>Email Address</b></label>
+                <input type="email" id="email" name="email" onkeyup="" required><br>
+                <label for="emaillabel" id="emaillabel"></label>
+                <br>
+                <input type="submit" name="submit" value="Register">
+            </div>
+        </form>
+        <script>
+            Register.action = "./register.html" + document.location.search; //keeping querystring on register page
+        </script>
+        </table>
+    </div>
+</body>
+
+</html>

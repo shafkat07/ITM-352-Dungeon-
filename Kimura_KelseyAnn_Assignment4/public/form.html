@@ -1,0 +1,118 @@
+<!-- Kelsey Ann Kimura: Order Form Page -->
+<!-- This is the order form page, where the user can enter quantities into the form to order certain items -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="./product_data.js"> //uses get request
+    </script>
+    <script>
+        // get the query string values from form submission (Lab13 order_page)
+        // From Assignment1_DesignExamples Asssignment1_2file products_display.html
+        let params = (new URL(document.location)).searchParams; //params is a variable, 
+
+        // Creating function window.onload so when the page is loading, it checks to make sure there is a quantity written and that the quantities in textbox are valid
+        //From Assignment1_Design_Examples > Asssignment1_2file > store_server.js 
+
+        window.onload = function () { // creating the function for window.onload
+            //Check if we're getting redirected from the server because of an error
+            if (params.has('hasValidQuantities')) { //if params has a valid quantity
+                //if there is a quantity error, put up an alert
+                if (params.get('hasValidQuantities') == 'false') { //if there is an invalid quantity
+                    alert('Please enter valid quantities.'); //if there is an invalid quantity error, put up an alert to enter a valid number
+                }
+                if (params.get('hasPurchases') == 'false') {    // if there are no quantities listed
+                    alert('Please select quantities to purchase.'); // if there is no quantities listed, put up alert to choose quantities
+                }
+            }
+
+
+            // Put the original data back into the textboxes
+            for (i = 0; i < product_data.length; i++) { // for every product
+                if (params.has(`quantity_textbox${i}`)) { // if there is something in the textbox
+                    a_qty = params.get(`quantity_textbox${i}`); // have a_qty equal to the value from the textbox
+                    // make textboxes sticky in case of invalid data
+                    quantity_form[`quantity_textbox${i}`].value = a_qty; // have the value from the textbox in the form for given product equal to a_qty
+                    if (!isNonNegInt(a_qty)) { // if a_qty is not an integer
+                        checkQuantityTextbox(quantity_form[`quantity_textbox${i}`]); // show where the error is
+                    }
+                }
+            }
+        }
+
+        //Checking quantity in the textbox (from Assignment1_Design_Examples 1_2 display)
+        function checkQuantityTextbox(theTextbox) {
+            errs = isNonNegInt(theTextbox.value, true); // err = value of whatever in textbox as long as integer
+            if (errs.length == 0) errs = ['You want:'];
+            if (theTextbox.value.trim() == '') errs = ['Quantity'];
+            document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+
+        }
+        //Creating the isNonNegInt function, which checks to make sure the quantity is a positive integer 
+        //From Lab 12 and 13
+        function isNonNegInt(q, returnErrors = false) { //Creating function isNonNegInt
+            errors = []; // assume no errors at first
+            if (Number(q) != q) errors.push('Not a number'); // Check if string is a number value
+            if (q < 0) errors.push('Negative value'); // Check if it is non-negative
+            if (parseInt(q) != q) errors.push('Not an integer'); // Check that it is an integer
+            return returnErrors ? errors : (errors.length == 0); //return no errors if the errors length is 0
+        }
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Order Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<header>
+    <h1>The Giraffe Factory</h1>
+</header>
+<div>
+    <main>
+        <link rel="stylesheet" href="form-style.css">
+
+        <body>
+            <form name="quantity_form" action="/purchase" method="GET">
+                <table cellpadding="10" border="1" bgcolor="#D2B48C">
+                    <tr>
+                        <th>Item #</th>
+                        <th>Product name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <script>
+                        //For every product in the array, write the product number, display its image and name, and list price
+                        for (i = 0; i < product_data.length; i++) {
+                            /*for every product in the product_data, display the item number, image, type, and price for each product in the table*/
+                            document.write(`
+                <tr>
+                   <td>${i + 1}</td>
+                    <td><img src="${product_data[i].image}"><br>${product_data[i].type}</td>
+                    <td>\$${product_data[i].price}</td>
+                    <td>
+                        <label id="quantity_textbox${i}_label"}>Quantity</label>
+                        <br>
+                <input type="text" id = "htmlform" placeholder="0" name="quantity_textbox${i}" size="1" onkeyup="checkQuantityTextbox(this);">
+            </td>
+    </tr>
+    `);
+
+                        }
+                    </script>
+
+                </table>
+
+                <input type="submit" value="Purchase">
+
+            </form>
+
+        </body>
+    </main>
+</div>
+<footer>
+    <h1>50% of sales go to supporting endangered giraffes in Africa!</h1>
+</footer>
+
+</html>

@@ -1,0 +1,129 @@
+/*Kelsey Ann Kimura: Form CSS*/
+/*This is the css for the product display and order form pages*/
+
+/*css based on SmartphoneProducts2/SmartphoneProducts3*/
+
+/* Image Specifications */ 
+img{
+    height:200px; /*height for all images is 200px*/
+    width:200px; /*width for all images is 200px*/
+}
+
+/* Styling the products display */
+main{
+    display: flex; /*set flex container on items, how item will grow/shrink in container*/
+    flex-flow: row wrap; /*will wrap items in a row*/
+    justify-content: space-around; /*browser distributes items so space around objects are even */
+    color: black; /*color of text is ivory*/
+}
+
+/*Setting css for the body*/
+/* Font from BrowserHistory2*/
+body{
+    background-color: ivory; /*change color background*/
+    background: url(./images/background2.jpg); /*Background image is from the ./public/images folder*/
+    font-family:'Open Sans',sans-serif; /*font is Open-Sans*/
+}
+
+/* Typography */
+
+h1,h2{ /*For text in the <h1> and <h2> headers*/
+    color: black; /*text color is ivory*/
+    text-align: center /*align text to center*/
+}
+/*Navigation Bar CSS*/
+/*https://www.w3schools.com/css/css_navbar.asp*/
+/*https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_sticky*/
+body {
+    font-size: 16px;
+  }
+  
+  ul {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  /* Add a gray right border to all list items, except the last item (last-child) */
+    li {
+    border-right: 1px solid #bbb;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #4CAF50;
+  }
+  /*Align Form to Center*/
+  form { 
+    margin: 0 auto; 
+    width:250px;
+    }
+
+    .newuser{
+        width: 40%;
+        margin-left: 30%;    
+        margin-right: 30%;    
+
+    }
+
+ul>li>img{
+    height:50px;
+    width: 80px;
+}
+
+/*Styling button element*/
+button {
+    margin: 0 auto;
+    display: block;
+}
+
+/*Styling the Search Form*/
+div > form{
+    margin: 0 auto; 
+    width:250px;    
+    text-align: center;
+    background-color: ivory;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #dcdcdc;
+}
+
+
+
+/*Styling the background of the biography text*/
+div > p {
+    background-color:ivory;
+    padding: 10px;
+}
+
+/*Styling the Table*/
+table{
+    background-color: ivory;
+    border: 0px;
+}
+
+/*Styling the Text on the "No view history yet" page*/
+p{
+  text-align: center;
+}

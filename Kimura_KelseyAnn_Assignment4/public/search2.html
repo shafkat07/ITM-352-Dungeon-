@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="form-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<header>
+    <a href="https://pasifika-artists.com/"> <h1>Pasifika Artists Network</h1></a>
+</header>
+
+<body>
+    <ul>
+        <li> <img src="./images/logo.jpg"></li>
+        <li><a href="./search2.html">Back to Search</a></li>
+        <li><a href="./my_list.html">My List</a></li>
+        <li><a href="./last_viewed.html">Last Viewed</a></li>
+      </ul>      
+
+    <div>
+        <!-- //Creating the login form*/
+/*Help from https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_password*/ -->
+        <!-- Help from https://www.w3schools.com/howto/howto_css_login_form.asp -->
+        <!-- Code for Maximum Length of Text: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text -->
+        <form name="search2" method="POST" action="/search_artist2">
+            <br> <br>
+            <div class="container">
+                <label for="genre" required><b>What genre are you looking for?</b></label>
+                <br>
+                <!-- Code for Dropdown Menu: https://www.w3schools.com/html/html_form_elements.asp -->
+                <select name="genre" id="genre" size="1">
+                    <option name="select_genre" value="select_genre">Select Genre</option>
+                    <option name="pacificroots" value="pacificroots">Pacific Roots</option>
+                    <option name="guitar" value="guitar">Guitar & 'Ukulele Masters</option>
+                    <option name="contemporary" value="contemporary">Island Contemporary</option>
+                    <option name="vocal" value="vocal">Vocal & Island Harmonies</option>
+                </select>
+                <br>
+                <br>
+                <input type="submit" name="submit" value="search">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

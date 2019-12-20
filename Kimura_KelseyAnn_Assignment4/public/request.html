@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+
+let params = (new URL(document.location)).searchParams; //params is a variable, 
+GET = {}; //GET is an empty object
+params.forEach(function (value, key) { GET[key] = value }); // the value is equal to the object of GET
+
+
+window.onload = function(){
+
+
+
+    if (params.has('request_errors')){
+        request_form['date'].value = params.get('date');
+        request_form['time'].value = params.get('time');
+        request_form['location'].value = params.get('location');
+        request_form['request_notes'].value = params.get('request_notes');
+        request_form['hours'].value = params.get('hours');
+    }
+
+    if (params.has('request_errors')) { //if detect name errors
+                var date_error = params.get('request_errors'); //make variable nameerrors
+                alert('Fix the following errors: \n' + params.get('request_errors'));
+                document.getElementById("dateerror").innerHTML = date_error; //write name errors where occur
+            }
+
+}
+
+
+/*Validating Date is after today*/
+//Source: https://www.codexworld.com/how-to/check-given-date-is-greater-than-today-javascript/
+
+function checkdate() {
+    var d = new Date(date.value);
+    console.log(date);
+    var t = new Date()
+    console.log(t + d);
+    if(d <= t){
+        console.log('nogoodday');
+        document.getElementById("dateerror").innerHTML =  '<font color="red">Date has already passed. Please select a future date.</font>'
+    }
+    else{
+        document.getElementById("dateerror").innerHTML = " "
+
+    }
+}
+
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Request Arist</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<header>
+    <a href="https://pasifika-artists.com/"> <h1>Pasifika Artists Network</h1></a>
+</header>
+<body>
+    <ul>
+        <li> <img src="./images/logo.jpg"></li>
+        <li><a href="./search2.html">Back to Search</a></li>
+        <li><a href="./my_list.html">My List</a></li>
+        <li><a href="./last_viewed.html">Last Viewed</a></li>
+      </ul>      
+<br>
+<br>
+<script>
+    email = GET[`email`];
+    name = GET[`name`];
+    artist_name = GET[`artist_name`]
+    document.write(`
+    <h2> Hello ${name}. Your request for artist ${artist_name} will be sent to your email: ${email}.</h2>
+    `)
+    </script>
+<br>
+    <form name="request_form" method="POST" action="./submit_request">
+        <label for="date">Date of Request</label>
+        <label for="dateerror" id="dateerror" name="dateerror"></label>
+        <br>
+        <input type="date" id="date" name="date" onclick="checkdate()" required>
+        <br>
+        <br>
+        <label for="time">Approximate Start time</label>
+        <br>
+        <input type="time" id="time" name="time" min="0:00" max="24:00" required>
+        <br>
+        <br>
+        <label for="end">About how many hours will the event be?</label>
+        <br>
+        <input type="number" id="hours" name="hours" min=1 max=10 required>
+        <br>
+        <br>
+        <label for="location">Location</label>
+        <br>
+        <input type="text" id="location" name="location" required>
+        <br>
+        <br>
+        <label for="request_notes">Please describe the details of the event (purpose of the event, specific requests,
+            etc.)</label>
+        <br>
+        <input type="text" id="request_notes" name="request_notes" style="height:200px;width:400px;">
+        <br>
+
+        <input type="submit" id="submit_request" name="submit_request">
+    </form>
+</body>
+
+</html>

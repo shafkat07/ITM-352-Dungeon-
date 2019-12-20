@@ -1,0 +1,93 @@
+<!-- Kelsey Ann Kimura: Login Page -->
+<!-- This webpage allows an existing user to login into their account and make a purchase. The username and password fields have validation to verify the new user. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script>
+        // get the query string values from form submission (Lab13 order_page)
+        // From Assignment1_DesignExamples Asssignment1_2file products_display.html
+        let params = (new URL(document.location)).searchParams; //params is a variable, 
+
+        // Creating function window.onload so when the page is loading, it checks to make sure there is a quantity written and that the quantities in textbox are valid
+        //From Assignment1_Design_Examples > Asssignment1_2file > store_server.js 
+
+        window.onload = function () { // creating the function for window.onload
+            //Check if we're getting redirected from the server because of an error
+            if (params.has('LogError')) { //if params has invalid registration data
+
+                // Put the original data back into the textboxes
+                //put values of query string into username and password boxes
+                login['username'].value = params.get('username');
+                login['password'].value = params.get('password');
+
+                //do for the rest of register form
+                //get errors, indicate them on form
+                //if there is a login error, put up an alert
+                alert('Invalid Username or Password');
+            }
+
+            /*To make sure login page has an artist name
+            If not, will redirect to the search page*/
+      /*      if (params.has('artist_request')) {
+                var artist_request = params.get(artist_request);
+                console.log(artist_request);
+            }
+            else {
+                alert('Please select an artist');
+                window.location = '/search2.html' + window.location.search;
+            }
+        */
+
+        }
+
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<header>
+    <a href="https://pasifika-artists.com/"> <h1>Pasifika Artists Network</h1></a>
+</header>
+<body>
+    <ul>
+        <li> <img src="./images/logo.jpg"></li>
+        <li><a href="./search2.html">Back to Search</a></li>
+        <li><a href="./my_list.html">My List</a></li>
+        <li><a href="./last_viewed.html">Last Viewed</a></li>
+      </ul>      
+<div>
+    <br>
+    <br>
+<!-- //Creating the login form*/
+/*Help from https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_password*/ -->
+<!-- Help from https://www.w3schools.com/howto/howto_css_login_form.asp -->
+    <form name="login" method="POST">
+        Please Log In Here: <br> <br>
+        <div class="container">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" id="username" name="username" required><br>
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" onkeyup="" required><br>
+        <br>
+        <input type="submit" name="login" value="Login">
+    </div>
+    </form>
+    <script>
+   login.action="./login.html" + document.location.search; //keep querystring on login page
+    </script>
+<br><br>
+New user? Create an account here:
+<br>
+    <br>
+        <input type="button" name="newuser" value="New User" onclick="window.location='./register.html' + document.location.search;">
+         
+</table>
+</div>
+</body>
+</html>

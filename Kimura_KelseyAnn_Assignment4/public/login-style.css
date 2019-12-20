@@ -1,0 +1,82 @@
+/*Kelsey Ann Kimura: Login CSS*/
+/*This is the css for the login/registration pages*/
+
+/*Styling background and font of body*/
+body{
+    background-color: ivory; /*change color background*/
+    font-family:'Open Sans',sans-serif; /*font is Open-Sans*/
+}
+
+h1,h2{ /*For text in the <h1> and <h2> headers*/
+  color: black; /*text color is ivory*/
+  text-align: center /*align text to center*/
+}
+
+/*Navigation Bar CSS*/
+/*https://www.w3schools.com/css/css_navbar.asp*/
+/*https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_sticky*/
+body {
+    font-size: 16px;
+  }
+  
+  ul {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  /* Add a gray right border to all list items, except the last item (last-child) */
+    li {
+    border-right: 1px solid #bbb;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #4CAF50;
+  }
+
+  /*CSS for the Forms*/
+  /*Help with centering from: https://stackoverflow.com/questions/9737394/html-how-to-center-align-a-form*/
+
+  form { 
+    margin: 0 auto; 
+    width:250px;
+    display: inline-block;
+    background-color: ivory;
+    }
+
+    /*Styling the New User Button*/
+    .newuser{
+        width: 40%;
+        margin-left: 30%;    
+        margin-right: 30%;    
+
+    }
+
+/*Styling the Logo Image in the Navigation Bar*/
+ul>li>img{
+    height:50px;
+    width: 80px;
+}
+
